@@ -1,12 +1,12 @@
-<h3><%= @total %> Total Stores</h3>
+<h3><%= @total %> Total Stores</h3><br>
 <ul>
   <% @stores.each do |store| %>
     <li class='store'>
       <h4><%= store.name %></h4>
-      <%= store.type %>
-      <%= store.phone %>
-      <%= store.city %>
-      <%= store.distance %>
+      Store: <%= store.type %><br>
+      Phone: <%= store.phone %><br>
+      Location: <%= store.city %><br>
+      Distance: <%= store.distance %><br>
     </li>
   <% end %>
 </ul>
