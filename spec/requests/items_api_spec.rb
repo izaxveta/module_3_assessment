@@ -36,6 +36,7 @@ RSpec.describe 'Items API' do
 
     expect(content['status']).to eq(204)
     expect(content['message']).to eq("Successfully deleted item #{item_2.id}.")
+    expect(Item.count).to eq(1)
   end
 
   it 'can create an item record response' do
@@ -46,12 +47,9 @@ RSpec.describe 'Items API' do
     content = JSON.parse(response.body)
 
     expect(response.status).to eq(201)
-    expect(content['item']['name']).to eq("Fantastic Linen Skirt")
+    expect(content['name']).to eq("Fantastic Linen Skirt")
+    expect(content['created_at']).to be_nil
+    expect(content['updated_at']).to be_nil
     expect(Item.count).to eq(1)
   end
-
-  # When I send a POST request to `/api/v1/items` with a name, description, and image_url
-  # I receive a 201 JSON  response if the record is successfully created
-  # And I receive a JSON response containing the id, name, description, and image_url but not the created_at or updated_at
-
 end

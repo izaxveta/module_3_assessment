@@ -7,13 +7,13 @@ class Api::V1::ItemsController < Api::V1::ApplicationController
 
   def create
     item = Item.create(item_params)
-    render status: 201, json: {
-      item: item, except: [:created_at, :updated_at]
-    }
+    render status: 201, json: item, except: [:created_at, :updated_at]
+
   end
 
   def destroy
     item = Item.find(params[:id])
+    item.destroy
     render json: {
       message: "Successfully deleted item #{item.id}.",
       status: 204
