@@ -4,7 +4,7 @@ RSpec.feature 'As a user' do
   scenario 'I can search stores by zip' do
     visit '/'
 
-    fill_in 'search[q]', with: '80202'
+    fill_in 'q', with: '80202'
 
     click_on "Search"
 

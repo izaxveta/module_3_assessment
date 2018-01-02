@@ -19,8 +19,8 @@
       <li>
         <a href="/orders">Orders</a>
       </li>
-      <li>
-        <%= form_for  %>
+      <li class='search-box'>
+        <%= text_field_tag(:q) %> <%= submit_tag "Search", controller: "search", action: "index" %>
       </li>
     </ul>
   </div>
