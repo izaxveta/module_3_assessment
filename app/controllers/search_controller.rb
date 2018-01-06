@@ -1,14 +1,13 @@
 class SearchController < ApplicationController
   def index
-    stores_data = store_presenter.present_store_search(params['q'])
-    @stores = stores_data.first
-    @total = stores_data.last
+    @stores = presenter(params['q']).stores
+    @total = presenter(params['q']).total
   end
 
   private
-    attr_reader :store_presenter
+    attr_reader :presenter
 
-    def store_presenter
-      @store_presenter ||= StorePresenter.new
+    def presenter(filter)
+      @presenter ||= StorePresenter.new(filter)
     end
 end
