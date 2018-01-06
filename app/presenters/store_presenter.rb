@@ -1,16 +1,25 @@
 class StorePresenter
+  def initialize(filter = {})
+    @filter = filter
+  end
 
-  def present_store_search(zip)
-    stores_data = store_service.store_search(zip)
-    stores = stores_data['stores'].map { |data| Store.new(data) }
-    total = stores_data['total']
-    [stores, total]
+  def stores
+    raw_data = store_service.get_stores_search(filter)['stores']
+    generate_stores(raw_data)
+  end
+
+  def total
+    stores_data = store_service.get_stores_search(filter)['total']
+  end
+
+  def generate_stores(stores_data)
+    stores_data.map { |data| Store.new(data) }
   end
 
   private
+    attr_reader :filter
 
     def store_service
       @store_service ||= StoreServices.new
     end
-
 end

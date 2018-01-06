@@ -12,5 +12,4 @@ class Store
     @city = data['city']
     @distance = data['distance']
   end
-
 end

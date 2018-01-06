@@ -1,6 +1,6 @@
 class StoreServices
 
-  def store_search(zip)
+  def get_stores_search(zip)
     response = @conn.get("stores(area(#{zip},25))?format=json&show=storeId,storeType,longName,phone,city,distance&pageSize=10&apiKey=#{ENV['API_KEY']}")
     JSON.parse(response.body)
   end
