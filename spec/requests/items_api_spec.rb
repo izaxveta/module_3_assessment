@@ -52,4 +52,31 @@ RSpec.describe 'Items API' do
     expect(content['updated_at']).to be_nil
     expect(Item.count).to eq(1)
   end
+
+  it 'can obtain all item records response' do
+    item_1
+    item_2
+
+    get '/api/v1/items'
+
+    content = JSON.parse(response.body)
+    expect(response.status).to eq(200)
+    expect(content.count).to eq(2)
+    expect(content.first['id']).to eq(item_1.id)
+    expect(content.first['created_at']).to be_nil
+    expect(content.first['updated_at']).to be_nil
+    expect(content.second['id']).to eq(item_2.id)
+    expect(content.second['created_at']).to be_nil
+    expect(content.second['updated_at']).to be_nil
+  end
+
+  it 'can update an item record response' do
+    item_1
+
+    patch "/api/v1/items/#{item_1.id}",  params: { item: { name: "Pink Cashmere Sweater"} }
+
+    content = JSON.parse(response.body)
+    expect(response.status).to eq(202)
+    expect(content['id']).to eq(item_1.id)
+  end
 end
