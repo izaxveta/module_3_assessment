@@ -23,7 +23,7 @@ class Api::V1::ItemsController < Api::V1::ApplicationController
     item.destroy
     render json: {
       message: "Successfully deleted item #{item.id}.",
-      status: 204    expect(content.first['created_at']).to be_nil
+      status: 204
     }
   end
 
