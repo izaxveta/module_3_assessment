@@ -1,7 +1,10 @@
 class StorePresenter
   def initialize(filter = {})
     @filter = filter
-    @stores_data = get_stores_data
+  end
+
+  def store_data
+    get_stores_data
   end
 
   def stores
