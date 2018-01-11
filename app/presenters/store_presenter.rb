@@ -3,17 +3,17 @@ class StorePresenter
     @filter = filter
   end
 
-  def store_data
-    get_stores_data
+  def raw_stores_data
+    @stores_data ||= get_stores_data
   end
 
   def stores
-    raw_data = stores_data['stores']
+    @raw_data ||= raw_stores_data['stores']
     generate_stores(raw_data)
   end
 
   def total
-    stores_data['total']
+    @total ||= stores_data['total']
   end
 
   def generate_stores(raw_data)
@@ -21,7 +21,7 @@ class StorePresenter
   end
 
   private
-    attr_reader :filter, :stores_data
+    attr_reader :filter, :stores_data, :raw_data
 
     def get_stores_data
       store_service.get_stores_search(filter)
